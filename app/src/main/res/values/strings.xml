@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">TrojaNow</string>
+    <string name="title_activity_main">TrojaNow</string>
+
+
+    <string name="title_section1">Thoughts Wall</string>
+    <string name="title_section2">Direct Messages</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="DM_fragment">DM fragment</string>
+    <string name="TW_fragment">TW fragment</string>
+
 </resources>
