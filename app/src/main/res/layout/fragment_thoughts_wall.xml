@@ -22,17 +22,19 @@
         android:ems="10"
         android:id="@+id/editText"
         android:layout_alignBottom="@+id/textView"
-        android:layout_toRightOf="@+id/textView" />
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="mile"
+        android:text="meter"
         android:id="@+id/textView2"
         android:layout_alignBottom="@+id/editText"
-        android:layout_toRightOf="@+id/editText"
-        android:layout_toEndOf="@+id/editText" />
+        android:layout_alignRight="@+id/listView"
+        android:layout_alignEnd="@+id/listView" />
 
     <GridLayout
         android:layout_width="wrap_content"

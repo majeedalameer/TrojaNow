@@ -1,52 +1,60 @@
 package edu.usc.trojanow.location;
 
+import android.location.Location;
+
 /**
  * Created by abdulmajeed on 3/24/15.
  */
 public class LocationInfo {
-    private float longitude;
-    private float latitude;
+    private double longitude;
+    private double latitude;
     private String locationName;
 
 
+
+    private Location locationObj;
+
     // constructor for the class
-    public LocationInfo(float longitude, float latitude) {
+    public LocationInfo(double longitude, double latitude,Location locationObj) {
         this.longitude = longitude;
         this.latitude = latitude;
-        this.locationName = getLocationString(this.longitude,this.latitude);
+        this.locationName = LocationHelper.getPlaceName(this.longitude, this.latitude);
+        this.locationObj = locationObj;
     }
 
     //this method returns the name of the location as a String
     // Similar to this format "Los Angeles, CA"
     public String getLocationString(float longitude, float latitude){
-        //TODO: fill method skeleton
-        return null;
+        return locationName;
     }
 
-    // This method returns the distance between this location and location loc
+    // This method returns the distance in meters between this location and location loc
     // it is useful when we want to show thoughts that are within specific radius
-    public int getDistance(LocationInfo loc){
-        //TODO: fill method skeleton
-        return 0;
+    public float getDistance(LocationInfo loc){
+        return locationObj.distanceTo(loc.getLocationObj());
     }
 
     //getter for longitude
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
     //setter for longitude
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     //getter for latitude
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
     //setter for latitude
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public Location getLocationObj() {
+        return locationObj;
     }
 }
