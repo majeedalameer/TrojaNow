@@ -128,10 +128,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1);
             switch (position){
-                case 1:
-                    return new DirectMessageFragment();
                 case 0:
                     return new ThoughtsWallFragment();
+                case 1:
+                    return new DirectMessageFragment();
+                case 2:
+                    return new NewThoughtFragment();
+                case 3:
+                    return new NewMessageFragment();
+
                 default:
                     break;
             }
@@ -141,8 +146,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         @Override
         public int getCount() {
-            // Show 2 total pages. change it to three if you want to add a third tab
-            return 2;
+            // Show 4 total pages. change it to
+            return 4;
         }
 
         @Override
@@ -155,6 +160,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     return getString(R.string.title_section2).toUpperCase(l);
                 case 2:
                     return getString(R.string.title_section3).toUpperCase(l);
+                case 3:
+                    return getString(R.string.title_section4).toUpperCase(l);
+
             }
             return null;
         }

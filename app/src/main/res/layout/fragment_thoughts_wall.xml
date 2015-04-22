@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="display Thoughts within:"
+        android:text="view Thoughts within:"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,11 +20,12 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/RangeText"
         android:layout_alignBottom="@+id/textView"
-        android:layout_toRightOf="@+id/textView"
         android:layout_toLeftOf="@+id/textView2"
-        android:layout_toStartOf="@+id/textView2" />
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:text="100" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,9 +33,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="meter"
         android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_alignRight="@+id/listView"
-        android:layout_alignEnd="@+id/listView" />
+        android:layout_alignBottom="@+id/RangeText"
+        android:layout_alignRight="@+id/thoughtslistView"
+        android:layout_alignEnd="@+id/thoughtslistView" />
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -47,23 +48,10 @@
         android:layout_centerHorizontal="true">
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Thought"
-            android:id="@+id/button5"
-            android:layout_alignTop="@+id/button6"
-            android:layout_toRightOf="@+id/button6"
-            android:layout_toEndOf="@+id/button6"
-            android:layout_margin="10dp"
-            android:layout_row="0"
-            android:layout_column="0" />
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Refresh Wall"
-            android:id="@+id/button6"
+            android:id="@+id/refreshbtn"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -78,7 +66,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/thoughtslistView"
         android:layout_below="@+id/gridLayout2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

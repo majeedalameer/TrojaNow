@@ -15,19 +15,6 @@
         android:id="@+id/gridLayout">
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Message"
-            android:id="@+id/button4"
-            android:layout_alignTop="@+id/button3"
-            android:layout_toRightOf="@+id/button3"
-            android:layout_toEndOf="@+id/button3"
-            android:layout_margin="10dp"
-            android:layout_row="0"
-            android:layout_column="0" />
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Refresh inbox"

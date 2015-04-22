@@ -18,8 +18,20 @@ public class LocationInfo {
     public LocationInfo(double longitude, double latitude,Location locationObj) {
         this.longitude = longitude;
         this.latitude = latitude;
-        this.locationName = LocationHelper.getPlaceName(this.longitude, this.latitude);
+        this.locationName = "";//LocationHelper.getPlaceName(this.longitude, this.latitude);
         this.locationObj = locationObj;
+    }
+
+    public LocationInfo(){
+        this.longitude = -1;
+        this.latitude = -1;
+        this.locationName = "";//LocationHelper.getPlaceName(this.longitude, this.latitude);
+        this.locationObj = null;
+
+    }
+
+    public String toString(){
+        return latitude+"|"+ longitude;
     }
 
     //this method returns the name of the location as a String

@@ -1,7 +1,13 @@
 package edu.usc.trojanow.thought;
 
-import java.util.ArrayList;
+import android.view.View;
+import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.usc.trojanow.R;
+import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
 
 /**
@@ -22,6 +28,9 @@ public class Wall {
         thoughts = getThoughtsFromServer(location,range);
     }
 
+    public Wall() {
+
+    }
 
     // Getter for Thought array
     public ArrayList<Thought> getThoughts() {
@@ -41,8 +50,17 @@ public class Wall {
     //this methods calls the server and retrieve the thoughts that are within
     //a specific range of a location;
     public ArrayList<Thought> getThoughtsFromServer(LocationInfo location, float range){
-        //TODO: update method skeleton
-        return null;
+        //TODO: update method to call server and get the thoughts instead of the empty arraylist
+
+        ArrayList<Thought> allThoughts = new ArrayList<Thought>();
+        ArrayList<Thought> filteredThoughts = null;
+
+        for (Thought thought: allThoughts) {
+            if(thought.getLocation().getDistance(location) <= range)
+                filteredThoughts.add(thought);
+        }
+
+        return filteredThoughts;
     }
 
 
