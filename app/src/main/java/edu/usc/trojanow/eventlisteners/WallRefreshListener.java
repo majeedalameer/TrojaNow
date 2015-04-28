@@ -71,6 +71,7 @@ public class WallRefreshListener implements View.OnClickListener {
                 range = 100;
             }
             System.out.println("range is "+range);
+            //TODO: replace or remove this
             for (int i = 0; i < 10; i++) {
                 System.out.println("This is done in background!!");
                 try{Thread.sleep(500);}catch (Exception e){};
