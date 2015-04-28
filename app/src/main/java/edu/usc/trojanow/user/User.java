@@ -1,8 +1,5 @@
 package edu.usc.trojanow.user;
 
-import edu.usc.trojanow.messages.DirectMessage;
-import edu.usc.trojanow.messages.Inbox;
-import edu.usc.trojanow.thought.Thought;
 
 /**
  * Created by abdulmajeed on 3/24/15.
@@ -12,7 +9,6 @@ public class User {
     private String firstName;
     private String lastName;
     private Email email;
-    private Inbox inbox;
 
     public User(String userName, String firstName, String lastName, Email email) {
         this.userName = userName;
@@ -21,6 +17,9 @@ public class User {
         this.email = email;
     }
 
+    /**
+     * Methods removed to make this component independent from others
+     *
     //this method calls the server and updates the inbox of direct messages
     public void updateInbox(){
         //TODO: update method skeleton
@@ -41,6 +40,7 @@ public class User {
         //TODO: update method skeleton
 
     }
+    */
 
 
     // Getters ...

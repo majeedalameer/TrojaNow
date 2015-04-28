@@ -2,6 +2,7 @@ package edu.usc.trojanow;
 
 import java.util.Locale;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -34,10 +35,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      */
     ViewPager mViewPager;
 
+    private static String currentUserName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra(LoginActivity.USERNAME_MESSAGE);
+        currentUserName = username;
+        //System.out.println("welcome "+Username+" !!");
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -133,9 +142,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 case 1:
                     return new DirectMessageFragment();
                 case 2:
-                    return new NewThoughtFragment();
+                    return NewThoughtFragment.newInstance(currentUserName);
                 case 3:
-                    return new NewMessageFragment();
+                    return NewMessageFragment.newInstance(currentUserName);
 
                 default:
                     break;
@@ -186,6 +195,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(LoginActivity.USERNAME_MESSAGE,currentUserName);
             fragment.setArguments(args);
             return fragment;
         }

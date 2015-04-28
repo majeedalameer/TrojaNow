@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import edu.usc.trojanow.location.FallbackLocationTracker;
 import edu.usc.trojanow.location.LocationHelper;
+import edu.usc.trojanow.location.ProviderLocationTracker;
 
 
 /**
@@ -16,30 +18,22 @@ import edu.usc.trojanow.location.LocationHelper;
  * create an instance of this fragment.
  */
 public class NewThoughtFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String userName = "unknown";
 
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param username Parameter 1.
      * @return A new instance of fragment NewThoughtFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NewThoughtFragment newInstance(String param1, String param2) {
+    public static NewThoughtFragment newInstance(String username) {
         NewThoughtFragment fragment = new NewThoughtFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(LoginActivity.USERNAME_MESSAGE, username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +46,7 @@ public class NewThoughtFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            userName = getArguments().getString(LoginActivity.USERNAME_MESSAGE);
         }
     }
 
@@ -64,8 +57,18 @@ public class NewThoughtFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_new_thought, container, false);
 
         EditText et = (EditText) v.findViewById(R.id.thoughtText);
-        LocationHelper locHelper = new LocationHelper(getActivity());
-        et.setText("location is:" + locHelper.getCurrentLocationFromAPI().toString());
+        /**
+        FallbackLocationTracker locationTracker = new FallbackLocationTracker(this.getActivity(), ProviderLocationTracker.ProviderType.GPS);
+        locationTracker.start();
+        if(locationTracker.hasLocation())
+            et.setText("location is:" + locationTracker.getLocation().getLatitude()+","+locationTracker.getLocation().getLongitude());
+        else if(locationTracker.hasPossiblyStaleLocation())
+            et.setText("stale location is:" + locationTracker.getPossiblyStaleLocation().getLatitude()+","+locationTracker.getPossiblyStaleLocation().getLongitude());
+        else
+            et.setText("location is not available");
+
+         */
+        et.setText("Welcome "+userName+" !!");
         return v;
     }
 

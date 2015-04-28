@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -39,6 +40,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
+    public final static String USERNAME_MESSAGE = "edu.usc.trojaNow.USERNAME";
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
@@ -244,6 +246,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mEmailView.setAdapter(adapter);
     }
 
+    public void startMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        EditText editText = (EditText) findViewById(R.id.username);
+        String username = editText.getText().toString();
+        intent.putExtra(USERNAME_MESSAGE, username);
+        startActivity(intent);
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -287,7 +297,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finish();
+                startMainActivity();
+                //finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

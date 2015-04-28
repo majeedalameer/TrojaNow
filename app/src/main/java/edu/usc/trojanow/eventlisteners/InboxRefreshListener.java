@@ -1,4 +1,4 @@
-package edu.usc.trojanow.messages;
+package edu.usc.trojanow.eventlisteners;
 
 import android.os.AsyncTask;
 import android.view.View;
@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import edu.usc.trojanow.R;
+import edu.usc.trojanow.messages.DirectMessage;
+import edu.usc.trojanow.messages.Inbox;
 import edu.usc.trojanow.user.Email;
 import edu.usc.trojanow.user.User;
 

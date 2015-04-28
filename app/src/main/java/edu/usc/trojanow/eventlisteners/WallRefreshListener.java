@@ -1,4 +1,4 @@
-package edu.usc.trojanow.thought;
+package edu.usc.trojanow.eventlisteners;
 
 import android.os.AsyncTask;
 import android.view.View;
@@ -13,6 +13,8 @@ import java.util.List;
 import edu.usc.trojanow.R;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.thought.Thought;
+import edu.usc.trojanow.thought.Wall;
 
 /**
  * Created by abdulmajeed on 4/21/15.

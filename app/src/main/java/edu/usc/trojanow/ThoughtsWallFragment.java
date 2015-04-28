@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import edu.usc.trojanow.location.LocationInfo;
-import edu.usc.trojanow.thought.Wall;
-import edu.usc.trojanow.thought.WallRefreshListener;
+import edu.usc.trojanow.eventlisteners.WallRefreshListener;
 
 
 /**
