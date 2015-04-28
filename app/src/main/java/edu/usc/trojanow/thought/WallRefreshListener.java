@@ -4,16 +4,15 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import edu.usc.trojanow.R;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
-import edu.usc.trojanow.sensor.TemperatureInfo;
-import edu.usc.trojanow.user.Email;
-import edu.usc.trojanow.user.User;
 
 /**
  * Created by abdulmajeed on 4/21/15.
@@ -21,28 +20,40 @@ import edu.usc.trojanow.user.User;
 public class WallRefreshListener implements View.OnClickListener {
 
 
-    public ListView wallview;
+    public ListView wallView;
     @Override
     public void onClick(View v) {
 
         if(v.getId() == R.id.refreshbtn) {
-            wallview = (ListView)v.getTag(R.id.thoughtslistView);
+            wallView = (ListView)v.getTag(R.id.thoughtslistView);
             CreateWallTask task = new CreateWallTask();
             task.execute(v);
         }
     }
 
     private void populateWallToGUI(Wall wall, ListView listview) {
-        //TODO: use the thought inside the wall instead of the dummy data
-        //        ArrayList<Thought> thoughts = wall.getThoughts();
-
-        ArrayList<Thought> thoughts = new ArrayList<Thought>(4);
-        thoughts.add(new Thought("this is a thought",new LocationInfo(123421,43244,null),
-                new TemperatureInfo(120.0f,'F',new Date()), new User("user1","John","Doe",new Email("Jong","google.com"))));
-        thoughts.add(new Thought("this is a second thought",new LocationInfo(2342345,43554,null),
-                new TemperatureInfo(110.0f,'F',new Date()), new User("user12","Mark","Alice",new Email("Mark","google.com"))));
+        ArrayList<Thought> thoughts = wall.getThoughts();
 
         System.out.println("now populating data");
+
+
+        // create the grid item mapping
+        String[] col_value = new String[] {"col_1", "col_2"};
+        int[] col_id = new int[] { R.id.txt1, R.id.txt2 };
+
+        // prepare the list of all records
+        List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
+        for(int i = 0; i < thoughts.size(); i++){
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("col_1", thoughts.get(i).getCreatedBy().getUserName());
+            map.put("col_2", thoughts.get(i).getText());
+            fillMaps.add(map);
+        }
+
+        // fill in the grid_item layout
+        SimpleAdapter adapter = new SimpleAdapter(listview.getContext(), fillMaps, R.layout.list_layout, col_value, col_id);
+        listview.setAdapter(adapter);
+
     }
 
 
@@ -51,9 +62,14 @@ public class WallRefreshListener implements View.OnClickListener {
         @Override
         protected Wall doInBackground(View... views) {
             LocationInfo location = new LocationHelper(views[0].getContext()).getCurrentLocationFromAPI();
-            float range = Float.parseFloat(((EditText) views[0].getTag(R.id.RangeText)).getText().toString());
+            float range;
+            try {
+                range = Float.parseFloat(((EditText) views[0].getTag(R.id.RangeText)).getText().toString());
+            }catch (Exception e){
+                range = 100;
+            }
             System.out.println("range is "+range);
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 10; i++) {
                 System.out.println("This is done in background!!");
                 try{Thread.sleep(500);}catch (Exception e){};
             }
@@ -63,7 +79,7 @@ public class WallRefreshListener implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(Wall result) {
-            populateWallToGUI(result, wallview);
+            populateWallToGUI(result, wallView);
         }
     }
 }

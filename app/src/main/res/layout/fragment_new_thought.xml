@@ -9,28 +9,29 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/thoughtText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:hint="what are your thoughts?"
         android:maxHeight="300dp"
-        android:minHeight="200dp" />
+        android:minHeight="200dp"
+        android:gravity="top" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Anonymous?"
         android:id="@+id/checkBox"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/thoughtText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add temperature"
+        android:text="Add temperature"
         android:id="@+id/checkBox2"
         android:checked="false"
         android:layout_alignTop="@+id/checkBox"

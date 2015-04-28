@@ -1,7 +1,5 @@
 package edu.usc.trojanow;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -65,7 +63,7 @@ public class NewThoughtFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_new_thought, container, false);
 
-        EditText et = (EditText) v.findViewById(R.id.editText2);
+        EditText et = (EditText) v.findViewById(R.id.thoughtText);
         LocationHelper locHelper = new LocationHelper(getActivity());
         et.setText("location is:" + locHelper.getCurrentLocationFromAPI().toString());
         return v;

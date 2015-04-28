@@ -8,6 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import edu.usc.trojanow.messages.InboxRefreshListener;
+import edu.usc.trojanow.thought.WallRefreshListener;
 
 
 /**
@@ -62,7 +66,13 @@ public class DirectMessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_direct_message, container, false);
+        View inboxView =  inflater.inflate(R.layout.fragment_direct_message, container, false);
+
+        Button refreshBtn = (Button)inboxView.findViewById(R.id.refreshInboxBtn);
+        refreshBtn.setTag(R.id.dmView,inboxView.findViewById(R.id.dmView));
+
+        refreshBtn.setOnClickListener(new InboxRefreshListener());
+        return inboxView;
     }
 
 }

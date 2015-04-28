@@ -76,8 +76,6 @@ public class ThoughtsWallFragment extends Fragment {
         refreshBtn.setOnClickListener(new WallRefreshListener());
 
 
-
-
         return wallView;
     }
 
