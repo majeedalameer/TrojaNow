@@ -68,6 +68,7 @@ public class WallRefreshListener implements View.OnClickListener {
             try {
                 range = Float.parseFloat(((EditText) views[0].getTag(R.id.RangeText)).getText().toString());
             }catch (Exception e){
+                // failed to scan the range use 100 as default
                 range = 100;
             }
             System.out.println("range is "+range);

@@ -35,7 +35,7 @@ public class FallbackLocationTracker  implements LocationTracker, LocationTracke
             return;
         }
 
-        //Start both
+        //start both
         gps.start(this);
         net.start(this);
         isRunning = true;

@@ -20,6 +20,14 @@ public class DirectMessage {
         this.messageTime = messageTime;
     }
 
+    public DirectMessage(String sender, String receiver, String messageText) {
+        this.sender = new User(sender);
+        this.receiver = new User(receiver);
+        this.messageText = messageText;
+        this.messageTime = new Date();
+    }
+
+
 
     // Getters for Direct Message attributes
     public User getSender() {
@@ -53,5 +61,10 @@ public class DirectMessage {
 
     public void setMessageTime(Date messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public void send() {
+        //TODO send message to server using server connector
+        System.out.println("message sent to the server!!");
     }
 }

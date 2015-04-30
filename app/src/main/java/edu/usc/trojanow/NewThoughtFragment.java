@@ -5,11 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
+import edu.usc.trojanow.eventlisteners.PostThoughListener;
+import edu.usc.trojanow.eventlisteners.WallRefreshListener;
 import edu.usc.trojanow.location.FallbackLocationTracker;
-import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.ProviderLocationTracker;
+import edu.usc.trojanow.sensor.SensorHelper;
 
 
 /**
@@ -57,7 +60,8 @@ public class NewThoughtFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_new_thought, container, false);
 
         EditText et = (EditText) v.findViewById(R.id.thoughtText);
-        /**
+
+        // TODO: remove this testing code...
         FallbackLocationTracker locationTracker = new FallbackLocationTracker(this.getActivity(), ProviderLocationTracker.ProviderType.GPS);
         locationTracker.start();
         if(locationTracker.hasLocation())
@@ -66,9 +70,19 @@ public class NewThoughtFragment extends Fragment {
             et.setText("stale location is:" + locationTracker.getPossiblyStaleLocation().getLatitude()+","+locationTracker.getPossiblyStaleLocation().getLongitude());
         else
             et.setText("location is not available");
+        SensorHelper sh = new SensorHelper(this.getActivity());
+        sh.start();
+        et.setText(et.getText()+"\nWelcome "+userName+" !! current temp = "+sh.getCurrentTemperatureFromAPI().toString());
+        // TODO: remove this testing code
 
-         */
-        et.setText("Welcome "+userName+" !!");
+        Button postBtn = (Button)v.findViewById(R.id.postbutton);
+        postBtn.setTag(R.id.thoughtText, v.findViewById(R.id.thoughtText));
+        postBtn.setTag(R.id.tempCheckbox, v.findViewById(R.id.tempCheckbox));
+        postBtn.setTag(R.id.anonyCheckBox, v.findViewById(R.id.anonyCheckBox));
+        postBtn.setTag(R.id.username,userName);
+        postBtn.setOnClickListener(new PostThoughListener());
+
+
         return v;
     }
 

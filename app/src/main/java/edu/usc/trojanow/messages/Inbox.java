@@ -28,6 +28,11 @@ public class Inbox {
         this.directMessages = getMessagesFromServer(user);
     }
 
+    public Inbox(String userName) {
+        this.inboxOwner = new User(userName);
+        this.directMessages = getMessagesFromServer(inboxOwner);
+    }
+
     // getter for direct messages
     public ArrayList<DirectMessage> getDirectMessages() {
         return directMessages;

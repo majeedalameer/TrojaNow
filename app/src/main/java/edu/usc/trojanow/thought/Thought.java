@@ -1,7 +1,16 @@
 package edu.usc.trojanow.thought;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationProvider;
+
+import edu.usc.trojanow.location.FallbackLocationTracker;
+import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.location.ProviderLocationTracker;
+import edu.usc.trojanow.sensor.SensorHelper;
 import edu.usc.trojanow.sensor.TemperatureInfo;
+import edu.usc.trojanow.user.Email;
 import edu.usc.trojanow.user.User;
 
 /**
@@ -19,6 +28,52 @@ public class Thought {
         this.location = location;
         this.temperature = temperature;
         this.createdBy = createdBy;
+    }
+
+    // create a thought with current location
+    public Thought(String text, String username, boolean isAnonymous , boolean includeTemperature, Context context) {
+        //prepare sensors
+        SensorHelper sh = new SensorHelper(context);
+        sh.start();
+        FallbackLocationTracker locationTracker = new FallbackLocationTracker(context, ProviderLocationTracker.ProviderType.GPS);
+        locationTracker.start();
+
+        //set location
+        if(locationTracker.hasLocation()) {
+            Location loc = locationTracker.getLocation();
+            this.location = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
+        }
+        else if(locationTracker.hasPossiblyStaleLocation()){
+            Location loc = locationTracker.getPossiblyStaleLocation();
+            this.location = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
+        }
+        else { //just assign dummy location in case no location is found (for testing)
+            this.location = new LocationInfo(-122.084099, 37.422099, null);
+        }
+        locationTracker.stop();
+
+        //set text
+        this.text = text;
+
+        //TODO: change this to get the userinfo from the Database
+        User user = isAnonymous? null:
+                new User(username,username,username,new Email(username,username));
+
+        //setUser
+        this.createdBy = user;
+        if(includeTemperature) {
+            this.temperature = sh.getCurrentTemperatureFromAPI();
+        }
+        else
+            this.temperature = null;
+
+        sh.stop();
+
+    }
+
+    public void postToServer(){
+        //TODO: call server and post this thought
+        System.out.println("Class Thought says Thought posted to the server !!");
     }
 
     // Getter for Thought text

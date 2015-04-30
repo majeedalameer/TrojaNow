@@ -16,6 +16,10 @@ public class TemperatureInfo {
         this.timeOfMeasurement = timeOfMeasurement;
     }
 
+    public String toString(){
+        return "("+temperatureDegree+" "+temperatureUnit+")";
+    }
+
 
 
     // Getters

@@ -17,6 +17,14 @@ public class User {
         this.email = email;
     }
 
+    public User(String userName){
+        //TODO: change this to call server to get user info;
+        this.userName = userName;
+        this.firstName = userName;
+        this.lastName = userName;
+        this.email = new Email(userName,userName);
+    }
+
     /**
      * Methods removed to make this component independent from others
      *

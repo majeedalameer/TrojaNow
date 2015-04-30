@@ -21,12 +21,14 @@ import edu.usc.trojanow.user.User;
 public class InboxRefreshListener implements View.OnClickListener {
 
 
-    public ListView messagesView;
+    private ListView messagesView;
+    private String userName = "unknown";
     @Override
     public void onClick(View v) {
 
         if(v.getId() == R.id.refreshInboxBtn) {
             messagesView = (ListView)v.getTag(R.id.dmView);
+            userName = (String)v.getTag(R.id.username);
             CreateInboxTask task = new CreateInboxTask();
             task.execute(v);
         }
@@ -62,11 +64,12 @@ public class InboxRefreshListener implements View.OnClickListener {
         //TODO: update this to call server and retrieve DMs
         @Override
         protected Inbox doInBackground(View... views) {
+            populateInboxToGUI(new Inbox(userName), messagesView);
             for (int i = 0; i < 10; i++) {
                 System.out.println("Downloading messages .. this is done in background!!");
                 try{Thread.sleep(500);}catch (Exception e){};
             }
-            Inbox inbox = new Inbox(new User("user12","Mark","Alice",new Email("Mark","google.com")));
+            Inbox inbox = new Inbox(userName);
             return inbox;
         }
 

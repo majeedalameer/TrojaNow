@@ -67,9 +67,9 @@ public class Wall {
         // TODO: delete this after fixing the code
         ArrayList<Thought> thoughts = new ArrayList<Thought>(4);
         thoughts.add(new Thought("this is a thought",new LocationInfo(123421,43244,null),
-                new TemperatureInfo(120.0f,'F',new Date()), new User("user1","John","Doe",new Email("Jong","google.com"))));
+                new TemperatureInfo(45.0f,'C',new Date()), new User("user1","John","Doe",new Email("Jong","google.com"))));
         thoughts.add(new Thought("this is a second thought",new LocationInfo(2342345,43554,null),
-                new TemperatureInfo(110.0f,'F',new Date()), new User("user12","Mark","Alice",new Email("Mark","google.com"))));
+                new TemperatureInfo(20.0f,'C',new Date()), new User("user12","Mark","Alice",new Email("Mark","google.com"))));
 
         filteredThoughts = thoughts;
         return filteredThoughts;
