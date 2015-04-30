@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import edu.usc.trojanow.eventlisteners.PostThoughListener;
+import edu.usc.trojanow.eventlisteners.PostThoughtListener;
 import edu.usc.trojanow.eventlisteners.WallRefreshListener;
 import edu.usc.trojanow.location.FallbackLocationTracker;
 import edu.usc.trojanow.location.ProviderLocationTracker;
@@ -80,7 +80,7 @@ public class NewThoughtFragment extends Fragment {
         postBtn.setTag(R.id.tempCheckbox, v.findViewById(R.id.tempCheckbox));
         postBtn.setTag(R.id.anonyCheckBox, v.findViewById(R.id.anonyCheckBox));
         postBtn.setTag(R.id.username,userName);
-        postBtn.setOnClickListener(new PostThoughListener());
+        postBtn.setOnClickListener(new PostThoughtListener());
 
 
         return v;
