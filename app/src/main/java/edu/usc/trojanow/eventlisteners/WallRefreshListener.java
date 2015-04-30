@@ -40,20 +40,25 @@ public class WallRefreshListener implements View.OnClickListener {
 
 
         // create the grid item mapping
-        String[] col_value = new String[] {"col_1", "col_2"};
-        int[] col_id = new int[] { R.id.txt1, R.id.txt2 };
+        String[] col_value = new String[] {"col_1", "col_2", "col_3"};
+        int[] col_id = new int[] { R.id.txtA, R.id.txtB , R.id.txtC };
 
         // prepare the list of all records
         List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
         for(int i = 0; i < thoughts.size(); i++){
             HashMap<String, String> map = new HashMap<String, String>();
-            map.put("col_1", thoughts.get(i).getCreatedBy().getUserName());
+            if(thoughts.get(i).getCreatedBy() != null) {
+                map.put("col_1", thoughts.get(i).getCreatedBy().getUserName());
+            }
             map.put("col_2", thoughts.get(i).getText());
+            if(thoughts.get(i).getTemperature() != null) {
+                map.put("col_3", "Temp: " + thoughts.get(i).getTemperature().toString());
+            }
             fillMaps.add(map);
         }
 
         // fill in the grid_item layout
-        SimpleAdapter adapter = new SimpleAdapter(listview.getContext(), fillMaps, R.layout.list_layout, col_value, col_id);
+        SimpleAdapter adapter = new SimpleAdapter(listview.getContext(), fillMaps, R.layout.thought_list_layout, col_value, col_id);
         listview.setAdapter(adapter);
 
     }

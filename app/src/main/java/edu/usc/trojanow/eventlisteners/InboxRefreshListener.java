@@ -37,7 +37,7 @@ public class InboxRefreshListener implements View.OnClickListener {
     private void populateInboxToGUI(Inbox inbox, ListView listview) {
         ArrayList<DirectMessage> directMessages = inbox.getDirectMessages();
 
-        System.out.println("now populating data");
+        System.out.println("now populating messages");
 
         // create the grid item mapping
         String[] col_value = new String[] {"col_1", "col_2"};
@@ -50,8 +50,9 @@ public class InboxRefreshListener implements View.OnClickListener {
             map.put("col_1", directMessages.get(i).getSender().getUserName());
             map.put("col_2", directMessages.get(i).getMessageText());
             fillMaps.add(map);
-        }
 
+            System.out.println("data:"+directMessages.get(i).getMessageText());
+        }
         // fill in the grid_item layout
         SimpleAdapter adapter = new SimpleAdapter(listview.getContext(), fillMaps, R.layout.list_layout, col_value, col_id);
         listview.setAdapter(adapter);
@@ -64,7 +65,6 @@ public class InboxRefreshListener implements View.OnClickListener {
         //TODO: update this to call server and retrieve DMs
         @Override
         protected Inbox doInBackground(View... views) {
-            populateInboxToGUI(new Inbox(userName), messagesView);
             for (int i = 0; i < 10; i++) {
                 System.out.println("Downloading messages .. this is done in background!!");
                 try{Thread.sleep(500);}catch (Exception e){};

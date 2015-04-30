@@ -25,8 +25,8 @@ public class FallbackLocationTracker  implements LocationTracker, LocationTracke
     public FallbackLocationTracker(Context context, ProviderLocationTracker.ProviderType type) {
         gps = new ProviderLocationTracker(context, ProviderLocationTracker.ProviderType.GPS);
         net = new ProviderLocationTracker(context, ProviderLocationTracker.ProviderType.GPS);
-        // TODO: change the second line to NETWORK, changed to GPS because emulator doesn't support
-        // network provider
+        // TODO: change the second line to NETWORK, changed to GPS because emulator doesn't support network provider
+
     }
 
     public void start(){

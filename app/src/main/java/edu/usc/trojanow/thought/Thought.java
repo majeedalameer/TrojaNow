@@ -71,9 +71,15 @@ public class Thought {
 
     }
 
+    public TemperatureInfo getTemperature(){
+        return temperature;
+    }
+
+
+
     public void postToServer(){
         //TODO: call server and post this thought
-        System.out.println("Class Thought says Thought posted to the server !!");
+        System.out.println("Class Thought says Thought is posted to the server !!");
     }
 
     // Getter for Thought text
