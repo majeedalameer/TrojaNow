@@ -35,7 +35,7 @@ import edu.usc.trojanow.user.User;
  * Created by abdulmajeed on 3/24/15.
  */
 public class ServerConnector {
-    private String connectionString="http://10.123.50.232/trojanNow/";
+    private String connectionString="http://10.120.88.88/trojanNow/";
 
     //this method posts a new thought to the server
     public void postThought(Thought thought){
@@ -87,7 +87,7 @@ public class ServerConnector {
 
         //This method calls the server to retrieve a JSON string that represents
         //the thoughts that are within specific range
-    public ArrayList<Thought> getThoughts(LocationInfo location, float range){
+    public ArrayList<Thought> getThoughts(){
         StringBuffer sb=null;
         try
         {

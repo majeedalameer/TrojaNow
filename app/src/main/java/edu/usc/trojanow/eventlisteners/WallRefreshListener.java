@@ -13,6 +13,7 @@ import java.util.List;
 import edu.usc.trojanow.R;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.serverconnector.ServerConnector;
 import edu.usc.trojanow.thought.Thought;
 import edu.usc.trojanow.thought.Wall;
 
@@ -80,7 +81,10 @@ public class WallRefreshListener implements View.OnClickListener {
             //TODO: replace or remove this
             for (int i = 0; i < 10; i++) {
                 System.out.println("This is done in background!!");
-                try{Thread.sleep(500);}catch (Exception e){};
+                //ServerConnector connector=new ServerConnector();
+              //  ArrayList<Thought> allThoughts = connector.getThoughts();
+                //if(allThoughts!=null)
+                   // System.out.println(allThoughts.get(0).getCreatedBy().getUserName());
             }
             Wall wall = new Wall(location,range);
             return wall;

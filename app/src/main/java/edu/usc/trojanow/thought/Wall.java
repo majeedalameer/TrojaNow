@@ -11,6 +11,7 @@ import edu.usc.trojanow.R;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
 import edu.usc.trojanow.sensor.TemperatureInfo;
+import edu.usc.trojanow.serverconnector.ServerConnector;
 import edu.usc.trojanow.user.Email;
 import edu.usc.trojanow.user.User;
 
@@ -56,23 +57,26 @@ public class Wall {
     public ArrayList<Thought> getThoughtsFromServer(LocationInfo location, float range){
         //TODO: update method to call server and get the thoughts instead of the empty Arraylist
 
-        ArrayList<Thought> allThoughts = new ArrayList<Thought>();
-        ArrayList<Thought> filteredThoughts = null;
+        ServerConnector connector=new ServerConnector();
+        ArrayList<Thought> allThoughts = connector.getThoughts();
+        ArrayList<Thought> filteredThoughts = new ArrayList<Thought>();
+        if(allThoughts!=null)
+         System.out.println(allThoughts.get(0).getCreatedBy().getUserName());
 
         for (Thought thought: allThoughts) {
             if(thought.getLocation().getDistance(location) <= range)
                 filteredThoughts.add(thought);
         }
-
+/*
         // TODO: delete this after fixing the code
         ArrayList<Thought> thoughts = new ArrayList<Thought>(4);
         thoughts.add(new Thought("this is a thought",new LocationInfo(123421,43244,null),
                 new TemperatureInfo(45.0f,'C',new Date()), new User("user1","John","Doe",new Email("Jong","google.com"))));
         thoughts.add(new Thought("this is a second thought",new LocationInfo(2342345,43554,null),
                 new TemperatureInfo(20.0f,'C',new Date()), new User("user12","Mark","Alice",new Email("Mark","google.com"))));
-
-        filteredThoughts = thoughts;
+*/
         return filteredThoughts;
+
     }
 
 

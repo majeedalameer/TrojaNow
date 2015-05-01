@@ -1,5 +1,7 @@
 package edu.usc.trojanow.serverconnector;
 
+import android.location.Location;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -52,15 +54,19 @@ User user=null;
             double longit,lat;
             LocationInfo location;
             TemperatureInfo temprature;
-            User user;
+            User user= new User("Anonymous","Anonymous","Anonymous",null);
             for(int i=0;i<object.length();i++)
             {
                 JSONObject obj = object.getJSONObject(i);
                 text=obj.getString("text");
+                Location lo=new Location("");
                 longit=Double.parseDouble(obj.getString("long"));
                 lat=Double.parseDouble(obj.getString("lat"));
-                location =new LocationInfo(longit,lat,null);
+                lo.setLatitude(lat);
+                lo.setLongitude(longit);
+                location =new LocationInfo(longit,lat,lo);
                 temprature=new TemperatureInfo(Float.parseFloat(obj.getString("temp")),emptyChar,null);
+                if(!obj.getString("anony").equalsIgnoreCase("true"))
                 user=new User(obj.getString("user"),obj.getString("user"),obj.getString("user"),null);
                 thought=new Thought(text,location,temprature,user);
                 arrayList.add(thought);
@@ -116,7 +122,7 @@ public static ArrayList<NameValuePair> composeJson(Thought thought)
     ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
     nameValuePairs.add(new BasicNameValuePair("user",thought.getCreatedBy().getUserName()));
     nameValuePairs.add(new BasicNameValuePair("text",thought.getText()));
-    nameValuePairs.add(new BasicNameValuePair("anony","false"));
+    nameValuePairs.add(new BasicNameValuePair("anony",thought.isAnonymous()+""));
     nameValuePairs.add(new BasicNameValuePair("temp","33"));
     nameValuePairs.add(new BasicNameValuePair("long",thought.getLocation().getLongitude()+""));
     nameValuePairs.add(new BasicNameValuePair("lat","32"));

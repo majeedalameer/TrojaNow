@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import edu.usc.trojanow.eventlisteners.PostThoughListener;
+import edu.usc.trojanow.eventlisteners.PostThoughtListener;
 import edu.usc.trojanow.eventlisteners.WallRefreshListener;
 import edu.usc.trojanow.location.FallbackLocationTracker;
 import edu.usc.trojanow.location.ProviderLocationTracker;
@@ -61,7 +61,7 @@ public class NewThoughtFragment extends Fragment {
 
         EditText et = (EditText) v.findViewById(R.id.thoughtText);
 
-        // TODO: remove this testing code...
+        /* TODO: remove this testing code...
         FallbackLocationTracker locationTracker = new FallbackLocationTracker(this.getActivity(), ProviderLocationTracker.ProviderType.GPS);
         locationTracker.start();
         if(locationTracker.hasLocation())
@@ -73,6 +73,7 @@ public class NewThoughtFragment extends Fragment {
         SensorHelper sh = new SensorHelper(this.getActivity());
         sh.start();
         et.setText(et.getText()+"\nWelcome "+userName+" !! current temp = "+sh.getCurrentTemperatureFromAPI().toString());
+        */
         // TODO: remove this testing code
 
         Button postBtn = (Button)v.findViewById(R.id.postbutton);
@@ -80,7 +81,7 @@ public class NewThoughtFragment extends Fragment {
         postBtn.setTag(R.id.tempCheckbox, v.findViewById(R.id.tempCheckbox));
         postBtn.setTag(R.id.anonyCheckBox, v.findViewById(R.id.anonyCheckBox));
         postBtn.setTag(R.id.username,userName);
-        postBtn.setOnClickListener(new PostThoughListener());
+        postBtn.setOnClickListener(new PostThoughtListener());
 
 
         return v;

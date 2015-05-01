@@ -34,8 +34,8 @@ public class LocationHelper{
         if(mLastLocation == null) {
             mLastLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        if (mLastLocation == null) {
-            locationinfo = new LocationInfo(-1, -1, null);
+        if (mLastLocation == null) { // just assign dummy location in case no location is found
+            locationinfo = new LocationInfo(-122.084099, 37.422099, new Location(""));
         }
         else
             locationinfo = new LocationInfo(mLastLocation.getLongitude(), mLastLocation.getLatitude(),mLastLocation);

@@ -10,6 +10,7 @@ import edu.usc.trojanow.location.LocationInfo;
 import edu.usc.trojanow.location.ProviderLocationTracker;
 import edu.usc.trojanow.sensor.SensorHelper;
 import edu.usc.trojanow.sensor.TemperatureInfo;
+import edu.usc.trojanow.serverconnector.ServerConnector;
 import edu.usc.trojanow.user.Email;
 import edu.usc.trojanow.user.User;
 
@@ -22,6 +23,9 @@ public class Thought {
     private LocationInfo location;
     private TemperatureInfo temperature;
     private User createdBy;
+
+
+    private boolean isAnonymous;
 
     public Thought(String text, LocationInfo location, TemperatureInfo temperature, User createdBy) {
         this.text = text;
@@ -38,6 +42,8 @@ public class Thought {
         FallbackLocationTracker locationTracker = new FallbackLocationTracker(context, ProviderLocationTracker.ProviderType.GPS);
         locationTracker.start();
 
+        this.isAnonymous = isAnonymous;
+
         //set location
         if(locationTracker.hasLocation()) {
             Location loc = locationTracker.getLocation();
@@ -48,7 +54,7 @@ public class Thought {
             this.location = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
         }
         else { //just assign dummy location in case no location is found (for testing)
-            this.location = new LocationInfo(-122.084099, 37.422099, null);
+            this.location = new LocationInfo(-122.084099, 37.422099, new Location(""));
         }
         locationTracker.stop();
 
@@ -79,7 +85,13 @@ public class Thought {
 
     public void postToServer(){
         //TODO: call server and post this thought
+        ServerConnector connector=new ServerConnector();
+        connector.postThought(this);
         System.out.println("Class Thought says Thought is posted to the server !!");
+    }
+
+    public boolean isAnonymous() {
+        return isAnonymous;
     }
 
     // Getter for Thought text
