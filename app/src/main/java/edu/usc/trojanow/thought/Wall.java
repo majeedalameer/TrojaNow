@@ -1,6 +1,7 @@
 package edu.usc.trojanow.thought;
 
 import android.content.Context;
+import android.location.Location;
 import android.view.View;
 import android.widget.EditText;
 
@@ -30,10 +31,9 @@ public class Wall {
 
     // constructor that create the wall by calling the server
     // and retrieve Thoughts that are within specific range
-    public Wall(float range, Context mContext) {
+    public Wall(float range, LocationInfo location) {
 
-        this.location = new FallbackLocationTracker(mContext, ProviderLocationTracker.ProviderType.GPS).getAnyLocation();
-
+        this.location = location;
         this.range = range;
         thoughts = getThoughtsFromServer(location,range);
     }

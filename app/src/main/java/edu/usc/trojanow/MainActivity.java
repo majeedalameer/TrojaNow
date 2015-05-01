@@ -140,7 +140,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 case 0:
                     return new ThoughtsWallFragment();
                 case 1:
-                    return new DirectMessageFragment();
+                    return DirectMessageFragment.newInstance(currentUserName);
                 case 2:
                     return NewThoughtFragment.newInstance(currentUserName);
                 case 3:

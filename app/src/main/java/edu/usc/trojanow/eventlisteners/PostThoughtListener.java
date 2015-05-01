@@ -9,8 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.usc.trojanow.R;
+import edu.usc.trojanow.location.FallbackLocationTracker;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.location.ProviderLocationTracker;
 import edu.usc.trojanow.thought.Thought;
 import edu.usc.trojanow.user.Email;
 import edu.usc.trojanow.user.User;
@@ -22,10 +24,12 @@ public class PostThoughtListener implements View.OnClickListener{
 
 
     public Context mContext;
+    public LocationInfo location;
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.postbutton) {
             mContext = v.getContext();
+            location = new FallbackLocationTracker(v.getContext(), ProviderLocationTracker.ProviderType.GPS).getAnyLocation();
             PostThoughTask task = new PostThoughTask();
             task.execute(v);
 
@@ -46,13 +50,8 @@ public class PostThoughtListener implements View.OnClickListener{
             EditText thoughtText = (EditText)postBtn.getTag(R.id.thoughtText);
 
 
-            Thought thought = new Thought(thoughtText.getText().toString(), username , isAnonymous.isChecked(), isTemp.isChecked(),mContext );
+            Thought thought = new Thought(thoughtText.getText().toString(), username , isAnonymous.isChecked(), isTemp.isChecked(),mContext, location );
             thought.postToServer();
-
-            //TODO: replace or remove this
-            for (int i = 0; i < 3; i++) {
-                System.out.println("This is done in background!! location is:" + thought.getLocation());
-            }
 
             return true;
         }

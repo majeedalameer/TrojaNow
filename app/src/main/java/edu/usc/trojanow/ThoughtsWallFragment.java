@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import edu.usc.trojanow.eventlisteners.WallRefreshListener;
+import edu.usc.trojanow.location.FallbackLocationTracker;
+import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.location.ProviderLocationTracker;
 
 
 /**
@@ -68,6 +71,7 @@ public class ThoughtsWallFragment extends Fragment {
 
         View wallView = inflater.inflate(R.layout.fragment_thoughts_wall, container, false);
         Button refreshBtn = (Button)wallView.findViewById(R.id.refreshbtn);
+
         refreshBtn.setTag(R.id.RangeText,wallView.findViewById(R.id.RangeText));
         refreshBtn.setTag(R.id.thoughtslistView,wallView.findViewById(R.id.thoughtslistView));
 

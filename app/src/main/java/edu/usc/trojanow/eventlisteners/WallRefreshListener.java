@@ -26,11 +26,13 @@ public class WallRefreshListener implements View.OnClickListener {
 
 
     public ListView wallView;
+    public LocationInfo location;
     @Override
     public void onClick(View v) {
 
         if(v.getId() == R.id.refreshbtn) {
             wallView = (ListView)v.getTag(R.id.thoughtslistView);
+            location = new FallbackLocationTracker(v.getContext(), ProviderLocationTracker.ProviderType.GPS).getAnyLocation();
             CreateWallTask task = new CreateWallTask();
             task.execute(v);
         }
@@ -80,7 +82,7 @@ public class WallRefreshListener implements View.OnClickListener {
             }
 
             System.out.println("range is "+range);
-            Wall wall = new Wall(range,views[0].getContext());
+            Wall wall = new Wall(range,location);
             return wall;
         }
 

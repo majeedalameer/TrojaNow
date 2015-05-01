@@ -2,6 +2,7 @@ package edu.usc.trojanow.messages;
 
 import java.util.Date;
 
+import edu.usc.trojanow.serverconnector.ServerConnector;
 import edu.usc.trojanow.user.User;
 
 /**
@@ -65,6 +66,8 @@ public class DirectMessage {
 
     public void send() {
         //TODO send message to server using server connector
+        ServerConnector connector=new ServerConnector();
+        connector.sendDirectMessage(this);
         System.out.println("message sent to the server!!");
     }
 }

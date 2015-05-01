@@ -35,15 +35,13 @@ public class Thought {
     }
 
     // create a thought with current location
-    public Thought(String text, String username, boolean isAnonymous , boolean includeTemperature, Context context) {
+    public Thought(String text, String username, boolean isAnonymous , boolean includeTemperature, Context context, LocationInfo location) {
         //prepare sensors
         SensorHelper sh = new SensorHelper(context);
         sh.start();
-        FallbackLocationTracker locationTracker = new FallbackLocationTracker(context, ProviderLocationTracker.ProviderType.GPS);
-
 
         //set location
-        this.location = locationTracker.getAnyLocation();
+        this.location = location;
 
         //set text
         this.text = text;

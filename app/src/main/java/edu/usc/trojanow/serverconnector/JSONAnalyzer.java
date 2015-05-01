@@ -53,7 +53,8 @@ User user=null;
             char emptyChar='\0';
             double longit,lat;
             LocationInfo location;
-            TemperatureInfo temprature;
+            String temp;
+            TemperatureInfo temprature=null;
             User user= new User("Anonymous","Anonymous","Anonymous",null);
             for(int i=0;i<object.length();i++)
             {
@@ -65,9 +66,15 @@ User user=null;
                 lo.setLatitude(lat);
                 lo.setLongitude(longit);
                 location =new LocationInfo(longit,lat,lo);
-                temprature=new TemperatureInfo(Float.parseFloat(obj.getString("temp")),emptyChar,null);
+                temp=obj.getString("temp");
+                if(!temp.equals("null"))
+                    temprature=new TemperatureInfo(Float.parseFloat(temp),emptyChar,null);
+                else
+                    temprature=null;
                 if(!obj.getString("anony").equalsIgnoreCase("true"))
-                user=new User(obj.getString("user"),obj.getString("user"),obj.getString("user"),null);
+                    user=new User(obj.getString("user"),obj.getString("user"),obj.getString("user"),null);
+                else
+                     user= new User("Anonymous","Anonymous","Anonymous",null);
                 thought=new Thought(text,location,temprature,user);
                 arrayList.add(thought);
             }
@@ -86,13 +93,13 @@ User user=null;
         try {
             JSONArray object = new JSONArray(json);
             DirectMessage msg=null;
-            String text,date;
+            String text;
             User sender,reciever;
             for(int i=0;i<object.length();i++)
             {
                 JSONObject obj = object.getJSONObject(i);
                 text=obj.getString("text");
-                date=obj.getString("date");
+                //date=obj.getString("date");
                 sender=new User(obj.getString("sender"),obj.getString("sender"),obj.getString("sender"),null);
                 reciever=new User(obj.getString("reciever"),obj.getString("reciever"),obj.getString("reciever"),null);
                 msg=new DirectMessage(sender,reciever,text,null);
@@ -118,14 +125,16 @@ User user=null;
 
 public static ArrayList<NameValuePair> composeJson(Thought thought)
 {
-
+String temp="null";
+    if(thought.getTemperature()!=null)
+        temp=thought.getTemperature().getTemperatureDegree()+"";
     ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
     nameValuePairs.add(new BasicNameValuePair("user",thought.getCreatedBy().getUserName()));
     nameValuePairs.add(new BasicNameValuePair("text",thought.getText()));
     nameValuePairs.add(new BasicNameValuePair("anony",thought.isAnonymous()+""));
-    nameValuePairs.add(new BasicNameValuePair("temp","33"));
+    nameValuePairs.add(new BasicNameValuePair("temp",temp));
     nameValuePairs.add(new BasicNameValuePair("long",thought.getLocation().getLongitude()+""));
-    nameValuePairs.add(new BasicNameValuePair("lat","32"));
+    nameValuePairs.add(new BasicNameValuePair("lat",thought.getLocation().getLatitude()+""));
     return nameValuePairs;
 }
     public static ArrayList<NameValuePair> composeJsonMsg(DirectMessage msg)

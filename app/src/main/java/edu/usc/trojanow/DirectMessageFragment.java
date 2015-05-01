@@ -57,6 +57,7 @@ public class DirectMessageFragment extends Fragment {
         Button refreshBtn = (Button)inboxView.findViewById(R.id.refreshInboxBtn);
         refreshBtn.setTag(R.id.dmView,inboxView.findViewById(R.id.dmView));
         refreshBtn.setTag(R.id.username,userName);
+        System.out.println("from Fragment"+userName);
         refreshBtn.setOnClickListener(new InboxRefreshListener());
         return inboxView;
     }

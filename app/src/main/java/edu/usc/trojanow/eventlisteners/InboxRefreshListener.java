@@ -65,10 +65,7 @@ public class InboxRefreshListener implements View.OnClickListener {
         //TODO: update this to call server and retrieve DMs
         @Override
         protected Inbox doInBackground(View... views) {
-            for (int i = 0; i < 10; i++) {
-                System.out.println("Downloading messages .. this is done in background!!");
-                try{Thread.sleep(500);}catch (Exception e){};
-            }
+
             Inbox inbox = new Inbox(userName);
             return inbox;
         }
