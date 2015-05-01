@@ -50,9 +50,8 @@ public class PostThoughtListener implements View.OnClickListener{
             thought.postToServer();
 
             //TODO: replace or remove this
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 3; i++) {
                 System.out.println("This is done in background!! location is:" + thought.getLocation());
-                try{Thread.sleep(500);}catch (Exception e){};
             }
 
             return true;

@@ -40,41 +40,32 @@ public class Thought {
         SensorHelper sh = new SensorHelper(context);
         sh.start();
         FallbackLocationTracker locationTracker = new FallbackLocationTracker(context, ProviderLocationTracker.ProviderType.GPS);
-        locationTracker.start();
 
-        this.isAnonymous = isAnonymous;
 
         //set location
-        if(locationTracker.hasLocation()) {
-            Location loc = locationTracker.getLocation();
-            this.location = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
-        }
-        else if(locationTracker.hasPossiblyStaleLocation()){
-            Location loc = locationTracker.getPossiblyStaleLocation();
-            this.location = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
-        }
-        else { //just assign dummy location in case no location is found (for testing)
-            this.location = new LocationInfo(-122.084099, 37.422099, new Location(""));
-        }
-        locationTracker.stop();
+        this.location = locationTracker.getAnyLocation();
 
         //set text
         this.text = text;
 
-        //TODO: change this to get the userinfo from the Database
-        User user = isAnonymous? null:
-                new User(username,username,username,new Email(username,username));
+        //TODO: change this to get the userinfo from the Database //isAnonymous? null:
+        User user = new User(username,username,username,new Email(username,username));
 
         //setUser
         this.createdBy = user;
+
+        //set temperature
         if(includeTemperature) {
             this.temperature = sh.getCurrentTemperatureFromAPI();
         }
-        else
+        else {
             this.temperature = null;
+        }
+        //set anonymous
+        this.isAnonymous = isAnonymous;
 
+        //stop sensor
         sh.stop();
-
     }
 
     public TemperatureInfo getTemperature(){
@@ -84,7 +75,6 @@ public class Thought {
 
 
     public void postToServer(){
-        //TODO: call server and post this thought
         ServerConnector connector=new ServerConnector();
         connector.postThought(this);
         System.out.println("Class Thought says Thought is posted to the server !!");

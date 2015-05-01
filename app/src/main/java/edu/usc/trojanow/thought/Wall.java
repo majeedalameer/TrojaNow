@@ -1,5 +1,6 @@
 package edu.usc.trojanow.thought;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
@@ -8,8 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 import edu.usc.trojanow.R;
+import edu.usc.trojanow.location.FallbackLocationTracker;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.location.ProviderLocationTracker;
 import edu.usc.trojanow.sensor.TemperatureInfo;
 import edu.usc.trojanow.serverconnector.ServerConnector;
 import edu.usc.trojanow.user.Email;
@@ -27,8 +30,10 @@ public class Wall {
 
     // constructor that create the wall by calling the server
     // and retrieve Thoughts that are within specific range
-    public Wall(LocationInfo location, float range) {
-        this.location = location;
+    public Wall(float range, Context mContext) {
+
+        this.location = new FallbackLocationTracker(mContext, ProviderLocationTracker.ProviderType.GPS).getAnyLocation();
+
         this.range = range;
         thoughts = getThoughtsFromServer(location,range);
     }
@@ -55,26 +60,15 @@ public class Wall {
     //this methods calls the server and retrieve the thoughts that are within
     //a specific range of a location;
     public ArrayList<Thought> getThoughtsFromServer(LocationInfo location, float range){
-        //TODO: update method to call server and get the thoughts instead of the empty Arraylist
 
         ServerConnector connector=new ServerConnector();
         ArrayList<Thought> allThoughts = connector.getThoughts();
         ArrayList<Thought> filteredThoughts = new ArrayList<Thought>();
-        if(allThoughts!=null)
-         System.out.println(allThoughts.get(0).getCreatedBy().getUserName());
 
         for (Thought thought: allThoughts) {
             if(thought.getLocation().getDistance(location) <= range)
                 filteredThoughts.add(thought);
         }
-/*
-        // TODO: delete this after fixing the code
-        ArrayList<Thought> thoughts = new ArrayList<Thought>(4);
-        thoughts.add(new Thought("this is a thought",new LocationInfo(123421,43244,null),
-                new TemperatureInfo(45.0f,'C',new Date()), new User("user1","John","Doe",new Email("Jong","google.com"))));
-        thoughts.add(new Thought("this is a second thought",new LocationInfo(2342345,43554,null),
-                new TemperatureInfo(20.0f,'C',new Date()), new User("user12","Mark","Alice",new Email("Mark","google.com"))));
-*/
         return filteredThoughts;
 
     }

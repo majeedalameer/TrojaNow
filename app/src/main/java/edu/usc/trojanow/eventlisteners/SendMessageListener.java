@@ -41,10 +41,6 @@ public class SendMessageListener implements View.OnClickListener{
             DirectMessage message = new DirectMessage(username,
                     recieverText.getText().toString(),messageText.getText().toString());
             message.send();
-            //TODO: remove this
-            for (int i = 0; i < 10; i++) {
-                try{Thread.sleep(500);}catch (Exception e){};
-            }
             return true;
         }
 

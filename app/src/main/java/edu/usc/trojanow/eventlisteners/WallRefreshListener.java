@@ -11,8 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import edu.usc.trojanow.R;
+import edu.usc.trojanow.location.FallbackLocationTracker;
 import edu.usc.trojanow.location.LocationHelper;
 import edu.usc.trojanow.location.LocationInfo;
+import edu.usc.trojanow.location.ProviderLocationTracker;
 import edu.usc.trojanow.serverconnector.ServerConnector;
 import edu.usc.trojanow.thought.Thought;
 import edu.usc.trojanow.thought.Wall;
@@ -69,7 +71,6 @@ public class WallRefreshListener implements View.OnClickListener {
 
         @Override
         protected Wall doInBackground(View... views) {
-            LocationInfo location = new LocationHelper(views[0].getContext()).getCurrentLocationFromAPI();
             float range;
             try {
                 range = Float.parseFloat(((EditText) views[0].getTag(R.id.RangeText)).getText().toString());
@@ -77,16 +78,9 @@ public class WallRefreshListener implements View.OnClickListener {
                 // failed to scan the range use 100 as default
                 range = 100;
             }
+
             System.out.println("range is "+range);
-            //TODO: replace or remove this
-            for (int i = 0; i < 10; i++) {
-                System.out.println("This is done in background!!");
-                //ServerConnector connector=new ServerConnector();
-              //  ArrayList<Thought> allThoughts = connector.getThoughts();
-                //if(allThoughts!=null)
-                   // System.out.println(allThoughts.get(0).getCreatedBy().getUserName());
-            }
-            Wall wall = new Wall(location,range);
+            Wall wall = new Wall(range,views[0].getContext());
             return wall;
         }
 

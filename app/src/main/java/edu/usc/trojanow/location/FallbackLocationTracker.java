@@ -82,6 +82,26 @@ public class FallbackLocationTracker  implements LocationTracker, LocationTracke
         return ret;
     }
 
+    public LocationInfo getAnyLocation(){
+        this.start();
+        LocationInfo returned;
+        //set location
+        if(this.hasLocation()) {
+            Location loc = this.getLocation();
+            returned = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
+        }
+        else if(this.hasPossiblyStaleLocation()){
+            Location loc = this.getPossiblyStaleLocation();
+            returned = new LocationInfo(loc.getLongitude(), loc.getLatitude(), loc);
+        }
+        else { //just assign dummy location in case no location is found (for testing)
+            returned = new LocationInfo(-122.084999, 37.422999, new Location(""));
+            System.out.println("dummy location is used");
+        }
+        this.stop();
+        return returned;
+    }
+
     public void onUpdate(Location oldLoc, long oldTime, Location newLoc, long newTime) {
         boolean update = false;
 

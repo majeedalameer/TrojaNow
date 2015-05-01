@@ -18,14 +18,14 @@ public class LocationInfo {
     public LocationInfo(double longitude, double latitude,Location locationObj) {
         this.longitude = longitude;
         this.latitude = latitude;
-        this.locationName = "";//LocationHelper.getPlaceName(this.longitude, this.latitude);
+        this.locationName = "";
         this.locationObj = locationObj;
     }
 
     public LocationInfo(){
         this.longitude = -1;
         this.latitude = -1;
-        this.locationName = "";//LocationHelper.getPlaceName(this.longitude, this.latitude);
+        this.locationName = "";
         this.locationObj = null;
 
     }
