@@ -1,4 +1,4 @@
-package edu.usc.trojanow;
+package edu.usc.trojanow.gui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import edu.usc.trojanow.R;
 import edu.usc.trojanow.eventlisteners.PostThoughtListener;
-import edu.usc.trojanow.eventlisteners.WallRefreshListener;
-import edu.usc.trojanow.location.FallbackLocationTracker;
-import edu.usc.trojanow.location.ProviderLocationTracker;
-import edu.usc.trojanow.sensor.SensorHelper;
 
 
 /**
