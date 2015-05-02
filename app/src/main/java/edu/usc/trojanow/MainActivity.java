@@ -1,4 +1,4 @@
-package edu.usc.trojanow.gui;
+package edu.usc.trojanow;
 
 import java.util.Locale;
 
@@ -16,8 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import edu.usc.trojanow.R;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {

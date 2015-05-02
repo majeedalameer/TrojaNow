@@ -1,5 +1,7 @@
-package edu.usc.trojanow.gui;
+package edu.usc.trojanow;
 
+import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import edu.usc.trojanow.R;
 import edu.usc.trojanow.eventlisteners.SendMessageListener;
+import edu.usc.trojanow.eventlisteners.WallRefreshListener;
 
 
 /**
