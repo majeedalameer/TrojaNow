@@ -1,4 +1,4 @@
-package edu.usc.trojanow;
+package edu.usc.trojanow.gui;
 
 
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import edu.usc.trojanow.R;
 import edu.usc.trojanow.eventlisteners.InboxRefreshListener;
 
 
